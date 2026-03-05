@@ -43,7 +43,7 @@ function combinations(arr, k) {
   return [...withFirst, ...withoutFirst];
 }
 
-// Core analysis: returns { matched, playingIndices, outIndices, unsettled }
+// Core analysis: returns { matched, playingIndices, outIndices, unsettled, windowFrom, windowTill }
 function analyzeDay(players) {
   const filledIndices = players
     .map((p, i) => ({ p, i }))
@@ -54,7 +54,7 @@ function analyzeDay(players) {
 
   // Not enough players yet
   if (filledCount < 4) {
-    return { matched: false, playingIndices: null, outIndices: [], unsettled: false };
+    return { matched: false, playingIndices: null, outIndices: [], unsettled: false, windowFrom: null, windowTill: null };
   }
 
   // Try all combinations of 4 filled players to find a winning group
@@ -63,12 +63,24 @@ function analyzeDay(players) {
     const group = combo.map(i => players[i]);
     if (groupHasWindow(group)) {
       const outIndices = filledIndices.filter(i => !combo.includes(i));
-      return { matched: true, playingIndices: combo, outIndices, unsettled: false };
+      // Calculate the actual overlap window
+      const overlapStart = Math.max(...group.map(p => timeToMins(p.from)));
+      const overlapEnd   = Math.min(...group.map(p => timeToMins(p.till)));
+      // Convert minutes back to time string
+      const toTimeStr = mins => `${Math.floor(mins/60)}:${mins%60 === 0 ? '00' : '30'}`;
+      return {
+        matched: true,
+        playingIndices: combo,
+        outIndices,
+        unsettled: false,
+        windowFrom: toTimeStr(overlapStart),
+        windowTill: toTimeStr(overlapEnd),
+      };
     }
   }
 
   // 4+ filled but no matching window
-  return { matched: false, playingIndices: null, outIndices: [], unsettled: filledCount >= 4 };
+  return { matched: false, playingIndices: null, outIndices: [], unsettled: filledCount >= 4, windowFrom: null, windowTill: null };
 }
 
 function emptyPlayer() {
@@ -129,7 +141,7 @@ export default function DaySection({ day, dayIndex, docId, lang = 'en' }) {
   }, [docId]);
 
   // ── Derived analysis ────────────────────────────────────────────────────────
-  const { matched, playingIndices, outIndices, unsettled } = analyzeDay(players);
+  const { matched, playingIndices, outIndices, unsettled, windowFrom, windowTill } = analyzeDay(players);
 
   // ── Celebration trigger ─────────────────────────────────────────────────────
   useEffect(() => {
@@ -214,7 +226,14 @@ export default function DaySection({ day, dayIndex, docId, lang = 'en' }) {
           <span className={styles.dayDate}>{dateStr}</span>
         </div>
         <div className={styles.badges}>
-          {matched    && <span className={styles.matchBadge}>{T.matchFound}</span>}
+          {matched && (
+            <div className={styles.matchInfo}>
+              <span className={styles.matchBadge}>{T.matchFound}</span>
+              <span className={styles.matchWindow}>
+                {formatTime(windowFrom)} – {formatTime(windowTill)}
+              </span>
+            </div>
+          )}
           {saving     && <span className={styles.savingDot} title="Saving…" />}
         </div>
       </div>
