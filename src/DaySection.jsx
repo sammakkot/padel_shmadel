@@ -104,6 +104,8 @@ export default function DaySection({ day, dayIndex, docId, lang = 'en' }) {
     till:              isRu ? 'До'                                   : 'Till',
     willBook:          isRu ? 'Я бронирую'                          : 'I will book',
     addMore:           isRu ? '+ Добавить игрока'                   : '+ Add another player',
+    resetDay:          isRu ? 'Сбросить день'                       : 'Reset day',
+    resetConfirm:      isRu ? 'Сбросить все записи на этот день? Это действие нельзя отменить.' : 'Reset all entries for this day? This cannot be undone.',
     loading:           isRu ? 'Загрузка…'                           : 'Loading…',
     notPlaying:        isRu ? 'не играет'                           : 'not playing',
     dayNames:          isRu ? DAY_NAMES_RU                          : DAY_NAMES_EN,
@@ -181,6 +183,12 @@ export default function DaySection({ day, dayIndex, docId, lang = 'en' }) {
       saveToFirestore(next);
       return next;
     });
+  };
+
+  const resetDay = () => {
+    const blank = [emptyPlayer(), emptyPlayer(), emptyPlayer(), emptyPlayer()];
+    setPlayers(blank);
+    saveToFirestore(blank);
   };
 
   // ── Derived display ─────────────────────────────────────────────────────────
@@ -289,6 +297,13 @@ export default function DaySection({ day, dayIndex, docId, lang = 'en' }) {
 
           <button className={styles.addMore} onClick={addMore}>
             {T.addMore}
+          </button>
+
+          <button
+            className={styles.resetBtn}
+            onClick={() => { if (window.confirm(T.resetConfirm)) resetDay(); }}
+          >
+            {T.resetDay}
           </button>
         </>
       )}

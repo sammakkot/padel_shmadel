@@ -271,6 +271,27 @@
   padding: 12px 0;
 }
 
+/* ── Reset button ── */
+.resetBtn {
+  margin-top: 6px;
+  margin-left: 16px;
+  background: none;
+  border: none;
+  color: #3a3a4a;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 0;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.resetBtn:hover {
+  color: #ff4444;
+}
+
 /* ── Responsive ── */
 @media (max-width: 540px) {
   .row {

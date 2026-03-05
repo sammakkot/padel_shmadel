@@ -25,6 +25,13 @@
   color: #1eff8e;
 }
 
+.tagline {
+  font-size: 0.82rem;
+  color: #556;
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+}
+
 .main {
   max-width: 820px;
   margin: 0 auto;
