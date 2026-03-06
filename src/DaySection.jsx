@@ -25,11 +25,15 @@ function timeToMins(t) {
   return h * 60 + m;
 }
 
-// Check if a specific array of players (all must be filled) share a 90-min window
+const DEFAULT_FROM = 7 * 60;   // 7:00 AM in minutes
+const DEFAULT_TILL = 22 * 60;  // 10:00 PM in minutes
+
+// Check if a specific array of players share a 90-min window.
+// Empty from = 7am, empty till = 10pm (player is flexible).
 function groupHasWindow(group) {
-  if (group.some(p => !p.name || !p.from || !p.till)) return false;
-  const overlapStart = Math.max(...group.map(p => timeToMins(p.from)));
-  const overlapEnd   = Math.min(...group.map(p => timeToMins(p.till)));
+  if (group.some(p => !p.name)) return false;
+  const overlapStart = Math.max(...group.map(p => p.from ? timeToMins(p.from) : DEFAULT_FROM));
+  const overlapEnd   = Math.min(...group.map(p => p.till ? timeToMins(p.till) : DEFAULT_TILL));
   return overlapEnd - overlapStart >= 90;
 }
 
@@ -47,7 +51,7 @@ function combinations(arr, k) {
 function analyzeDay(players) {
   const filledIndices = players
     .map((p, i) => ({ p, i }))
-    .filter(({ p }) => p.name && p.from && p.till)
+    .filter(({ p }) => p.name)   // only name is required; from/till default if empty
     .map(({ i }) => i);
 
   const filledCount = filledIndices.length;
@@ -63,9 +67,9 @@ function analyzeDay(players) {
     const group = combo.map(i => players[i]);
     if (groupHasWindow(group)) {
       const outIndices = filledIndices.filter(i => !combo.includes(i));
-      // Calculate the actual overlap window
-      const overlapStart = Math.max(...group.map(p => timeToMins(p.from)));
-      const overlapEnd   = Math.min(...group.map(p => timeToMins(p.till)));
+      // Calculate the actual overlap window (use defaults for empty from/till)
+      const overlapStart = Math.max(...group.map(p => p.from ? timeToMins(p.from) : DEFAULT_FROM));
+      const overlapEnd   = Math.min(...group.map(p => p.till ? timeToMins(p.till) : DEFAULT_TILL));
       // Convert minutes back to time string
       const toTimeStr = mins => `${Math.floor(mins/60)}:${mins%60 === 0 ? '00' : '30'}`;
       return {

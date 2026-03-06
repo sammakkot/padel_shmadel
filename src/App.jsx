@@ -1,4 +1,5 @@
 import DaySection from './DaySection.jsx';
+import Notes from './Notes.jsx';
 import styles from './App.module.css';
 
 const DAY_COUNT = 10;
@@ -34,6 +35,7 @@ export default function App() {
         {days.map((day, i) => (
           <DaySection key={dateKey(day)} day={day} dayIndex={i} docId={dateKey(day)} />
         ))}
+        <Notes lang="en" />
       </main>
     </div>
   );

@@ -1,0 +1,63 @@
+.section {
+  background: #181c24;
+  border: 1px solid #252a35;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.savingDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #f5c518;
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.noteInput {
+  width: 100%;
+  background: #0f1117;
+  border: 1px solid #252a35;
+  border-radius: 8px;
+  color: #e8e8e8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.noteInput:focus {
+  border-color: #f5c518;
+}
+
+.noteInput::placeholder {
+  color: #333;
+  font-style: italic;
+}
