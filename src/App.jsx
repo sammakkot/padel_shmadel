@@ -28,7 +28,7 @@ export default function App() {
         <h1 className={styles.title}>
           PADEL <span className={styles.accent}>SHMADEL</span>
         </h1>
-        <p className={styles.tagline}>Let's find 4 people for a 1.5 hour slot. Next 10 days.</p>
+        <p className={styles.tagline}>Let's find 4 people for a 1.5 hour slot. Next 10 days. Updates live — no refresh needed.</p>
       </header>
 
       <main className={styles.main}>
