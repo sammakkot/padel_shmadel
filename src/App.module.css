@@ -6,7 +6,6 @@
 
 .header {
   background: #0f1117;
-  border-bottom: 2px solid #1eff8e;
   padding: 24px 24px 18px;
   position: sticky;
   top: 0;
@@ -30,6 +29,21 @@
   color: #556;
   letter-spacing: 0.06em;
   margin-top: 6px;
+}
+
+.headerDivider {
+  height: 2px;
+  background: #1eff8e;
+  margin-top: 16px;
+}
+
+.cornerGif {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
 }
 
 .main {

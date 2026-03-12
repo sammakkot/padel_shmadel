@@ -25,10 +25,16 @@ export default function App() {
   return (
     <div className={styles.app}>
       <header className={styles.header}>
+        <img
+          className={styles.cornerGif}
+          src="https://media1.tenor.com/m/nZjskh3El28AAAAd/le-bron-padel-le-bron.gif"
+          alt="Padel dance gif"
+        />
         <h1 className={styles.title}>
           PADEL <span className={styles.accent}>SHMADEL</span>
         </h1>
         <p className={styles.tagline}>Let's find 4 people for a 1.5 hour slot. Next 10 days. Updates live — no refresh needed.</p>
+        <div className={styles.headerDivider} />
       </header>
 
       <main className={styles.main}>
@@ -40,3 +46,6 @@ export default function App() {
     </div>
   );
 }
+
+
+
