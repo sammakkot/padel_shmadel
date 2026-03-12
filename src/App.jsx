@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import DaySection from './DaySection.jsx';
 import Notes from './Notes.jsx';
 import styles from './App.module.css';
@@ -21,15 +22,28 @@ function dateKey(d) {
 
 export default function App() {
   const days = getDays();
+  const [cornerGifMinimized, setCornerGifMinimized] = useState(false);
 
   return (
     <div className={styles.app}>
       <header className={styles.header}>
-        <img
-          className={styles.cornerGif}
-          src="https://media1.tenor.com/m/nZjskh3El28AAAAd/le-bron-padel-le-bron.gif"
-          alt="Padel dance gif"
-        />
+        <div
+          className={`${styles.cornerGifWrap} ${cornerGifMinimized ? styles.cornerGifMinimized : ''}`}
+        >
+            <button
+              type="button"
+              className={styles.cornerGifClose}
+              aria-label={cornerGifMinimized ? 'Expand corner gif' : 'Minimize corner gif'}
+              onClick={() => setCornerGifMinimized((prev) => !prev)}
+            >
+              {cornerGifMinimized ? '+' : '-'}
+            </button>
+            <img
+              className={styles.cornerGif}
+              src="https://media1.tenor.com/m/nZjskh3El28AAAAd/le-bron-padel-le-bron.gif"
+              alt="Padel dance gif"
+            />
+        </div>
         <h1 className={styles.title}>
           PADEL <span className={styles.accent}>SHMADEL</span>
         </h1>
