@@ -41,15 +41,15 @@
   position: absolute;
   top: 14px;
   right: 16px;
-  width: 192px;
-  height: 192px;
+  width: 230px;
+  height: 230px;
 }
 
 .cornerGifMinimized {
   top: 0;
   right: 0;
-  width: 96px;
-  height: 96px;
+  width: 77px;
+  height: 77px;
 }
 
 .cornerGif {

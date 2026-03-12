@@ -22,7 +22,7 @@ function dateKey(d) {
 
 export default function App() {
   const days = getDays();
-  const [cornerGifMinimized, setCornerGifMinimized] = useState(false);
+  const [cornerGifMinimized, setCornerGifMinimized] = useState(true);
 
   return (
     <div className={styles.app}>
@@ -30,24 +30,30 @@ export default function App() {
         <div
           className={`${styles.cornerGifWrap} ${cornerGifMinimized ? styles.cornerGifMinimized : ''}`}
         >
-            <button
-              type="button"
-              className={styles.cornerGifClose}
-              aria-label={cornerGifMinimized ? 'Expand corner gif' : 'Minimize corner gif'}
-              onClick={() => setCornerGifMinimized((prev) => !prev)}
-            >
-              {cornerGifMinimized ? '+' : '-'}
-            </button>
-            <img
-              className={styles.cornerGif}
-              src="https://media1.tenor.com/m/nZjskh3El28AAAAd/le-bron-padel-le-bron.gif"
-              alt="Padel dance gif"
-            />
+          <button
+            type="button"
+            className={styles.cornerGifClose}
+            aria-label={cornerGifMinimized ? 'Expand corner gif' : 'Minimize corner gif'}
+            onClick={() => setCornerGifMinimized((prev) => !prev)}
+          >
+            {cornerGifMinimized ? '+' : '-'}
+          </button>
+          <img
+            className={styles.cornerGif}
+            src="https://media1.tenor.com/m/nZjskh3El28AAAAd/le-bron-padel-le-bron.gif"
+            alt="Padel dance gif"
+          />
         </div>
         <h1 className={styles.title}>
           PADEL <span className={styles.accent}>SHMADEL</span>
         </h1>
-        <p className={styles.tagline}>Let's find 4 people for a 1.5 hour slot. Next 10 days. Updates live — no refresh needed.</p>
+        <p className={styles.tagline}>
+          Let's find 4 people for a 1.5 hour slot.
+          <br />
+          Next 10 days.
+          <br />
+          Updates live — no refresh needed.
+        </p>
         <div className={styles.headerDivider} />
       </header>
 
@@ -60,6 +66,15 @@ export default function App() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
 
 
 
