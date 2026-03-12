@@ -48,7 +48,7 @@ export default function App() {
           PADEL <span className={styles.accent}>SHMADEL</span>
         </h1>
         <p className={styles.tagline}>
-          Let's find 4 people for a 1.5 hour slot.
+          Find 4 people for a 1.5 hour slot.
           <br />
           Next 10 days.
           <br />
